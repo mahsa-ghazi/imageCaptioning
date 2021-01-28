@@ -1,0 +1,42 @@
+version: "3"
+services:
+ image_captioning_dashboard:
+   container_name: image_captioning_dashboard
+   build: .
+   ports:
+     - "2222:2222"
+   env_file:
+      - .env
+   networks:
+     - mongo_network
+   depends_on:
+     - mongo_db
+     - mysql_db
+   environment:
+    - DATABASE_HOST=mysql_db
+
+ mongo_db:
+   image: mongo
+   container_name: mongo_db
+   ports:
+    - "27017:27017"
+   networks:
+     - mongo_network
+   volumes:
+    - $PWD/mongodata:/data/db
+
+ mysql_db:
+    container_name: mysql_db
+    build: ./mysql
+    networks:
+     - mongo_network  
+    ports:
+    - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: shenasa123
+    volumes:
+      - $PWD/mysqldata:/var/lib/mysql
+
+networks:
+  mongo_network:
+    driver: bridge

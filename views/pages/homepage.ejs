@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Image Captioning | dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles/css.css">
+  <link rel="stylesheet" href="/templates/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/templates/dist/css/adminlte.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="/js/dist/css/skins/_all-skins.min.css">
+
+<script src="/templates/plugins/jquery/jquery.min.js"></script>
+<script src="/templates/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/templates/dist/js/adminlte.min.js"></script>
+<script src="/templates/dist/js/demo.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdragdrop.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxinput.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxchart.core.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdropdownbutton.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxcheckbox.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdraw.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxcolorpicker.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxcombobox.js"></script>
+<script type="text/javascript" src="/js/jqxScripts/demos.js"></script>
+<script type="text/javascript" src="/js/generatedata.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdatatable.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxnumberinput.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxtabs.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxfileupload.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxtreegrid.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxtooltip.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxwindow.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxeditor.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxradiobutton.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdocking.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxsplitter.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgauge.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.columnsresize.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini">
+  <%if (req.session.userId == 'undefined' ||  req.session.name == undefined) { 
+    %>
+    <script>
+    window.location = '/login';
+    </script>
+  <% }%>
+<div class="wrapper">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+    
+    </ul>
+  </nav>
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="#" class="brand-link">
+      <img src="/templates/dist/img/AdminLTELogo.png"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Image Captioning</span>
+    </a>
+    <a href="/logout" class="nav-link">
+      <span class="brand-text font-weight-light"><i class="fa fa-sign-out">logout</i></span>
+    </a>
+    <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="/templates/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"><%= req.session.name %></a>
+        </div>
+      </div>
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">  
+          <!-- <li class="nav-item">
+            <a href="#uploadQuestion" class="nav-link">
+              <i class="fa fa-circle-o"> upload Question </i>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="#approveCaptions" class="nav-link">
+              <i class="fa fa-circle-o"> approve Captions </i>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Image Captioning</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <div class="card-header">
+          <h3 id="title" class="card-title">dashboard</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+          <ng-view>
+          </ng-view>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 0.0.1
+    </div>
+    <strong>Copyright 2020 <a href="#">Image Captioning</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>

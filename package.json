@@ -1,0 +1,33 @@
+{
+  "name": "imagecaptioningdashboard",
+  "version": "1.0.0",
+  "description": "a [Sails v1](https://sailsjs.com) application",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "machinepack-emailaddresses": "^0.4.0",
+    "machinepack-passwords": "^2.3.0",
+    "mongodb-core": "^3.2.7",
+    "mongoose": "^4.11.5",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-gen": "^2.1.1",
+    "mysql": "^2.18.1",
+    "normalize-path": "^3.0.0",
+    "sails": "^1.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js --port 2222"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/mahsaghazi/winny_dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/mahsaghazi/winny_dashboard/issues"
+  },
+  "homepage": "https://gitlab.com/mahsaghazi/winny_dashboard#readme"
+}

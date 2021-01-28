@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-init="options={};options.one.selected=true;myform.email=0"  ng-app="myAPP">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Image Captioning | Login </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/templates/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/templates/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="/templates/dist/css/adminlte.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+    .error-message {
+      color: red;
+    }
+    input.ng-dirty.ng-invalid {
+      border-color: red;
+    }
+  </style>
+</head>
+<body ng-controller="adminController" class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>Image</b>Captioning</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form novalidate name="myform" ng-submit="login()">
+        <div class="input-group mb-3">
+          <input ng-model="user.email" ng-required="true" ng-minlength="5" type="email" ng-model-options="{updateOn: 'blur'}" class="form-control" placeholder="Email">
+            <span class="error-message"  ng-show="myform.email.$dirty && myform.email.$error.required">
+              the Email is mandatory
+            </span>
+            <span class="error-message"  ng-show="myform.email.$dirty && myform.email.$error.minlength">
+              the email should be minimum 5 character
+            </span>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input ng-model="user.password" ng-required="true" ng-minlength="5" type="password" ng-model-options="{updateOn: 'blur'}" class="form-control" placeholder="Password">
+            <span class="error-message"  ng-show="myform.password.$dirty && myform.password.$error.required">
+              the password is mandatory
+            </span>
+            <span class="error-message"  ng-show="myform.password.$dirty && myform.password.$error.minlength">
+              the retype password should be minimum 2 character
+            </span>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+
+<script type="text/javascript" src='/js/jslib/angular.min.js'></script>
+<script type="text/javascript" src='/js/jslib/angular-route.js'></script>
+<script type="text/javascript" src='/js/jslib/angular-resource.js'></script>
+<!-- Angular routes -->
+<script type="text/javascript" src='/js/app/app.js'></script>
+<script type="text/javascript" src='/js/app/controllers/adminController.js'></script>
+<script type="text/javascript" src='/js/app/controllers/captionController.js'></script>
+
+<!-- jQuery -->
+<script src="/templates/plugins/jquery/jquery.min.js"></script>
+<script src="/templates/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/templates/dist/js/adminlte.min.js"></script>
+</body>
+</html>

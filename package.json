@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/mahsaghazi/winny_dashboard.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/mahsaghazi/winny_dashboard/issues"
+  
   },
-  "homepage": "https://gitlab.com/mahsaghazi/winny_dashboard#readme"
+  "homepage": ""
 }

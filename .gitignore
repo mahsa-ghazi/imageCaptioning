@@ -133,7 +133,7 @@ lib-cov
 *.log
 *.out
 *.pid
-api/services/dbs
+
 mysqldata
 mongodata
 

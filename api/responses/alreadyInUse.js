@@ -1,6 +1,3 @@
-/**
- * Created by mahsa on 8/12/17.
- */
 
 module.exports = function alreadyInUse (err){
 

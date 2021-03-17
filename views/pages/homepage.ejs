@@ -62,7 +62,12 @@
 
 </head>
 <body class="hold-transition sidebar-mini">
- 
+  <%if (req.session.userId == 'undefined' ||  req.session.name == undefined) { 
+    %>
+    <script>
+    window.location = '/login';
+    </script>
+  <% }%>
 <div class="wrapper">
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
@@ -86,7 +91,7 @@
           <img src="/templates/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">ffff</a>
+          <a href="#" class="d-block"><%= req.session.name %></a>
         </div>
       </div>
       <nav class="mt-2">

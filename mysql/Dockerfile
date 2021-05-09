@@ -4,5 +4,5 @@ FROM mysql:5.7
 ENV MYSQL_ROOT_PASSWORD shenasa123
 ENV MYSQL_DATABASE image_captioning
 
-COPY test.sql /docker-entrypoint-initdb.d/
+COPY data_entries.sql /docker-entrypoint-initdb.d/
 

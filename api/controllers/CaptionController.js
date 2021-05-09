@@ -15,8 +15,8 @@ module.exports = {
         var pagenum = req.param('pagenum');
         var pagesize = req.param('pagesize');
         var start = pagenum * pagesize;
-        var query = "SELECT * FROM `data_entries` WHERE `is_translated`<>'' and is_correct = 0 limit " + start + "," + pagesize; 
-        var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_translated`<>'' and is_correct = 0  ";
+        var query = "SELECT * FROM `data_entries` WHERE `is_translated`= 1 and is_correct = 0 limit " + start + "," + pagesize; 
+        var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_translated`= 1 and is_correct = 0  ";
         mysqlConnection.mysqlConn('image_captioning').then((connetcion) => {
             mysqlConnection.query(connetcion, AllTotalRowQuery).then((countResponse) => {
                 mysqlConnection.query(connetcion, query).then((result) => {

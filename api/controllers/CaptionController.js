@@ -7,6 +7,16 @@ var cocoImageUrl = "https://filebox.ece.vt.edu/~aroma/web/coco_images/train2014/
 const mysqlConnection = require("../services/mysqlConnection");
 const { Console } = require('console');
 require('dotenv').config()
+var mysql = require('mysql');
+var pool  = mysql.createPool({
+  connectionLimit : 10,
+  host     : process.env.DATABASE_HOST || '127.0.0.1',
+  user     : 'root',
+  password : 'shenasa123',
+  database : 'image_captioning',
+  port: 3306,
+  insecureAuth: true
+});
 
 module.exports = {
   
@@ -17,30 +27,21 @@ module.exports = {
         var start = pagenum * pagesize;
         var query = "SELECT * FROM `data_entries` WHERE `is_translated`= 1 and is_correct = 0 limit " + start + "," + pagesize; 
         var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_translated`= 1 and is_correct = 0  ";
-        mysqlConnection.mysqlConn('image_captioning').then((connetcion) => {
-            mysqlConnection.query(connetcion, AllTotalRowQuery).then((countResponse) => {
-                mysqlConnection.query(connetcion, query).then((result) => {
-                    var totalArray = [];
-                    result.forEach((currentRes) => {
-                        var tmp = {};
-                        tmp.imageId = currentRes.image_id;
-                        tmp.sentences = currentRes.translated_txt;
-                        tmp.caption = currentRes.caption;
-                        tmp.id = currentRes.id;
-                        totalArray.push(tmp);
-                    });
-                    var totalRes = {"Rows": totalArray, "TotalRows": countResponse[0].TotalRows}
+        pool.query(query, function (error, results, fields) {
+            var totalArray = [];
+            results.forEach((currentRes) => {
+                var tmp = {};
+                tmp.imageId = currentRes.image_id;
+                tmp.sentences = currentRes.translated_txt;
+                tmp.caption = currentRes.caption;
+                tmp.id = currentRes.id;
+                totalArray.push(tmp);
+            });
+            pool.query(AllTotalRowQuery, function (error, countResponse, fields) {
+                var totalRes = {"Rows": totalArray, "TotalRows": countResponse[0].TotalRows}
                     return res.ok(totalRes);
-                }).catch((error) => {
-                    console.log(error);
-                });
-            }).catch((err) => {
-                console.log(err);
             });
-            }).catch((error) => {
-                console.log(error);
-            });
-       
+        });
     },
     
     saveCorrectTraslation : (req, res) => {
@@ -49,18 +50,13 @@ module.exports = {
         var totalIds = param.totalId;
         totalIds = totalIds.toString()
         var updateQuery = "UPDATE data_entries SET is_correct = 1  WHERE id IN (" + totalIds + ")";
-        mysqlConnection.mysqlConn('image_captioning').then((connetcion) => {
-            mysqlConnection.query(connetcion, updateQuery).then((countResponse) => {
-                var affectedRows = countResponse.affectedRows;
-                    console.log(affectedRows);
-                    response.statusCode = 200;
-                    response.message = "درخواست شما ثبت شد";
-                    return res.ok(response);
-            }).catch((err) => {
-                console.log(err);
-            });
-            }).catch((error) => {
-            })
+
+        pool.query(updateQuery, function (error, countResponse, fields) {
+            var affectedRows = countResponse.affectedRows;
+            response.statusCode = 200;
+            response.message = "درخواست شما ثبت شد";
+            return res.ok(response);
+        });
     },
 
     loadImage : (req, res) => {
@@ -77,21 +73,13 @@ module.exports = {
         var response = {}
         var recordId = req.param('recordId');
         var translatedData = req.param('translatedData');
-
         var updateQuery = "UPDATE data_entries SET 	translated_txt = '" + translatedData + "'  WHERE id = " + recordId + "";
-        mysqlConnection.mysqlConn('image_captioning').then((connetcion) => {
-            mysqlConnection.query(connetcion, updateQuery).then((countResponse) => {
-                var affectedRows = countResponse.affectedRows;
-                    console.log(affectedRows);
-                    response.statusCode = 200;
-                    response.message = "درخواست شما ثبت شد";
-                    return res.ok(response);
-            }).catch((err) => {
-                console.log(err);
-            });
-            }).catch((error) => {
-                console.log(error);
-            });
+        pool.query(updateQuery, function (error, countResponse, fields) {
+            var affectedRows = countResponse.affectedRows;
+            response.statusCode = 200;
+            response.message = " :) درخواست شما ثبت شد";
+            return res.ok(response);
+        });
     }
 };
 

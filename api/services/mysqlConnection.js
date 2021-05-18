@@ -3,7 +3,6 @@ var mysql = require('mysql');
 module.exports = {
 
     mysqlConn: (db) => {
-        console.log(">>>>>", process.env.DATABASE_HOST)
         return new Promise ((resolve, reject) => {
             var con = mysql.createConnection({
                 host     : process.env.DATABASE_HOST || '127.0.0.1',

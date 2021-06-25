@@ -9,14 +9,14 @@ const { Console } = require('console');
 require('dotenv').config()
 var mysql = require('mysql');
 var pool  = mysql.createPool({
-  connectionLimit : 10,
-  host     : process.env.DATABASE_HOST || '127.0.0.1',
-  user     : 'root',
-  password : 'shenasa123',
-  database : 'image_captioning',
-  port: 3306,
-  insecureAuth: true
-});
+    connectionLimit : 10,
+    host     : process.env.DATABASE_HOST || '127.0.0.1',
+    user     : 'root',
+    password : 'shenasa123',
+    database : 'image_captioning',
+    port: 3306,
+    insecureAuth: true
+  });
 
 module.exports = {
   
@@ -25,10 +25,11 @@ module.exports = {
         var pagenum = req.param('pagenum');
         var pagesize = req.param('pagesize');
         var start = pagenum * pagesize;
-        var query = "SELECT * FROM `data_entries` WHERE `is_translated`= 1 and is_correct = 0 limit " + start + "," + pagesize; 
-        var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_translated`= 1 and is_correct = 0  ";
+        var query = "SELECT * FROM `data_entries` WHERE `is_updated`= 1 and is_correct = 0 limit " + start + "," + pagesize; 
+        var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_updated`= 1 and is_correct = 0  ";
         pool.query(query, function (error, results, fields) {
             var totalArray = [];
+            console.log('---->>>>>>>>', query, error, results, fields )
             results.forEach((currentRes) => {
                 var tmp = {};
                 tmp.imageId = currentRes.image_id;

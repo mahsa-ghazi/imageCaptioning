@@ -5,7 +5,7 @@ module.exports = {
     mysqlConn: (db) => {
         return new Promise ((resolve, reject) => {
             var con = mysql.createConnection({
-                host     : process.env.DATABASE_HOST || '127.0.0.1',
+                host     : '127.0.0.1',
                 user     : 'root',
                 password : 'shenasa123',
                 database : 'image_captioning',

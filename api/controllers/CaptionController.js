@@ -25,12 +25,17 @@ module.exports = {
         var pagenum = req.param('pagenum');
         var pagesize = req.param('pagesize');
         var start = pagenum * pagesize;
+<<<<<<< HEAD
         // var query = "SELECT * FROM `data_entries`  limit " + start + "," + pagesize; 
         // var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries`  ";
 
         var query = "SELECT * FROM `data_entries` WHERE `is_updated`= 1 and is_correct = 0 limit " + start + "," + pagesize; 
         var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_updated`= 1 and is_correct = 0  ";
 
+=======
+        var query = "SELECT * FROM `data_entries` WHERE `is_updated`= 1 and is_correct = 0 limit " + start + "," + pagesize; 
+        var AllTotalRowQuery = "SELECT count(*) as TotalRows FROM `data_entries` WHERE `is_updated`= 1 and is_correct = 0  ";
+>>>>>>> bebdc85e29bf0f01e823090969d4b086b3d2ed81
         pool.query(query, function (error, results, fields) {
             var totalArray = [];
             console.log( error )
